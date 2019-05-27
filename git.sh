@@ -59,8 +59,10 @@ do
 		if [ $? -ne 0 ]
 		then
 			echo $?
+			echo "fail"
 		else
 			echo $?
+			echo "success"
 		fi
 		echo "++++++++++++++++    checkout 结束    ++++++++++++++++"
 		
