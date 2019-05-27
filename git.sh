@@ -26,18 +26,22 @@ do
 	# **********   操作二开始执行   **********
 	elif [ 2 == ${number} ]
 	then
+		echo "++++++++    pull 开始    ++++++++"
 		git pull
-		echo "++++++++    pull 完    ++++++++"
+		echo "++++++++    pull 结束    ++++++++"
 		
+		echo "++++++++    add 开始    ++++++++"
 		git add .
-		echo "++++++++    add 完    ++++++++"
+		echo "++++++++    add 结束    ++++++++"
 		
+		echo "++++++++    commit 开始    ++++++++"
 		read -p "请输入提交备注: " remark
 		git commit -m ${remark}
-		echo "++++++++    commit 完    ++++++++"
+		echo "++++++++    commit 结束    ++++++++"
 		
+		echo "++++++++    push 开始    ++++++++"
 		git push
-		echo "++++++++    push 完    ++++++++"
+		echo "++++++++    push 结束    ++++++++"
 	# **********   操作二结束执行   **********
 	
 	
