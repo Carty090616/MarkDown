@@ -8,6 +8,7 @@ echo -e "\t 1：git pull"
 echo -e "\t 2：git add"
 echo -e "\t 3：git checkout"
 echo -e "\t 4：git merge"
+echo -e "\t 5：exit"
 
 # 循环执行
 while true
@@ -16,14 +17,14 @@ do
 	# 用户输入
 	read -p "请输入需要执行的操作选项: " number
 
-	# **********   操作一开始执行   **********
+	# **********   git pull 开始执行   **********
 	if [ 1 == ${number} ]
 	then
 		git pull
-	# **********   操作一结束执行   **********
+	# **********   git pull 结束执行   **********
 	
 	
-	# **********   操作二开始执行   **********
+	# **********   git add 开始执行   **********
 	elif [ 2 == ${number} ]
 	then
 		echo "++++++++++++++++    pull 开始    ++++++++++++++++"
@@ -35,28 +36,75 @@ do
 		echo "++++++++++++++++    add 结束    ++++++++++++++++"
 		
 		echo "++++++++++++++++    commit 开始    ++++++++++++++++"
-		read -p "请输入提交备注: " remark
+		read -p "请输入commit操作备注: " remark
 		git commit -m ${remark}
 		echo "++++++++++++++++    commit 结束    ++++++++++++++++"
 		
 		echo "++++++++++++++++    push 开始    ++++++++++++++++"
 		git push
 		echo "++++++++++++++++    push 结束    ++++++++++++++++"
-	# **********   操作二结束执行   **********
+	# **********   git add 结束执行   **********
 	
 	
-	# **********   操作三开始执行   **********
+	# **********   git checkout 开始执行   **********
 	elif [ 3 == ${number} ]
 	then
-		exit
-	# **********   操作三结束执行   **********
+		echo "++++++++++++++++    pull 开始    ++++++++++++++++"
+		git pull
+		echo "++++++++++++++++    pull 结束    ++++++++++++++++"
+		
+		echo "++++++++++++++++    checkout 开始    ++++++++++++++++"
+		read -p "请输入需要切换的分支名: " checkoutBranch
+		git checkout ${checkoutBranch}
+		if [ $? -ne 0 ]
+		then
+			echo $?
+			echo "fail"
+		else
+			echo $?
+			echo "success"
+		fi
+		echo "++++++++++++++++    checkout 结束    ++++++++++++++++"
+		
+		echo "++++++++++++++++    pull 开始    ++++++++++++++++"
+		git pull
+		echo "++++++++++++++++    pull 结束    ++++++++++++++++"
+	# **********   git checkout 结束执行   **********
 	
 	
-	# **********   操作四开始执行   **********
+	# **********   git merge 开始执行   **********
 	elif [ 4 == ${number} ]
 	then
+		echo "++++++++++++++++    pull 开始    ++++++++++++++++"
+		git pull
+		echo "++++++++++++++++    pull 结束    ++++++++++++++++"
+		
+		echo "++++++++++++++++    checkout 开始    ++++++++++++++++"
+		read -p "请输入需要切换的分支名: " branch
+		git checkout ${branch}
+		echo "++++++++++++++++    checkout 结束    ++++++++++++++++"
+		
+		echo "++++++++++++++++    pull 开始    ++++++++++++++++"
+		git pull
+		echo "++++++++++++++++    pull 结束    ++++++++++++++++"
+		
+		echo "++++++++++++++++    merge 开始    ++++++++++++++++"
+		read -p "请输入merge操作备注: " mergeRemark
+		read -p "请输入需要合并的分支名: " mergeBranch
+		git merge --no-ff -m ${mergeRemark} ${mergeBranch}
+		echo "++++++++++++++++    merge 结束    ++++++++++++++++"
+		
+		echo "++++++++++++++++    push 开始    ++++++++++++++++"
+		git push
+		echo "++++++++++++++++    push 结束    ++++++++++++++++"
+	# **********   git merge 结束执行   **********
+	
+	
+	# **********   exit   **********
+	elif [ 5 == ${number} ]
+	then
 		exit
-	# **********   操作四结束执行   **********
+	# **********   exit   **********
 	
 	
 	# **********   没有识别出的操作   **********
