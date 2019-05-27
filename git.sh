@@ -20,6 +20,7 @@ do
 	# **********   git pull 开始执行   **********
 	if [ 1 == ${number} ]
 	then
+		git status
 		git pull
 	# **********   git pull 结束执行   **********
 	
@@ -28,7 +29,17 @@ do
 	elif [ 2 == ${number} ]
 	then
 		echo "++++++++++++++++    pull 开始    ++++++++++++++++"
+		git status
 		git pull
+		# 出现错误，判断是否继续
+		if [ $? -ne 0 ]
+		then
+			read -p "是否继续执行【y/n】: " addIsProcess01
+			if [ "n" == ${addIsProcess01} ]
+			then
+				exit
+			fi
+		fi
 		echo "++++++++++++++++    pull 结束    ++++++++++++++++"
 		
 		echo "++++++++++++++++    add 开始    ++++++++++++++++"
@@ -50,24 +61,45 @@ do
 	elif [ 3 == ${number} ]
 	then
 		echo "++++++++++++++++    pull 开始    ++++++++++++++++"
+		git status
 		git pull
+		# 出现错误，判断是否继续
+		if [ $? -ne 0 ]
+		then
+			read -p "是否继续执行【y/n】: " addIsProcess01
+			if [ "n" == ${addIsProcess01} ]
+			then
+				exit
+			fi
+		fi
 		echo "++++++++++++++++    pull 结束    ++++++++++++++++"
 		
 		echo "++++++++++++++++    checkout 开始    ++++++++++++++++"
 		read -p "请输入需要切换的分支名: " checkoutBranch
 		git checkout ${checkoutBranch}
+		# 出现错误，判断是否继续
 		if [ $? -ne 0 ]
 		then
-			echo $?
-			echo "fail"
-		else
-			echo $?
-			echo "success"
+			read -p "是否继续执行【y/n】: " addIsProcess01
+			if [ "n" == ${addIsProcess01} ]
+			then
+				exit
+			fi
 		fi
 		echo "++++++++++++++++    checkout 结束    ++++++++++++++++"
 		
 		echo "++++++++++++++++    pull 开始    ++++++++++++++++"
+		# 出现错误，判断是否继续
 		git pull
+		# 出现错误，判断是否继续
+		if [ $? -ne 0 ]
+		then
+			read -p "是否继续执行【y/n】: " addIsProcess01
+			if [ "n" == ${addIsProcess01} ]
+			then
+				exit
+			fi
+		fi
 		echo "++++++++++++++++    pull 结束    ++++++++++++++++"
 	# **********   git checkout 结束执行   **********
 	
@@ -76,22 +108,59 @@ do
 	elif [ 4 == ${number} ]
 	then
 		echo "++++++++++++++++    pull 开始    ++++++++++++++++"
+		git status
 		git pull
+		# 出现错误，判断是否继续
+		if [ $? -ne 0 ]
+		then
+			read -p "是否继续执行【y/n】: " addIsProcess01
+			if [ "n" == ${addIsProcess01} ]
+			then
+				exit
+			fi
+		fi
 		echo "++++++++++++++++    pull 结束    ++++++++++++++++"
 		
 		echo "++++++++++++++++    checkout 开始    ++++++++++++++++"
 		read -p "请输入需要切换的分支名: " branch
 		git checkout ${branch}
+		# 出现错误，判断是否继续
+		if [ $? -ne 0 ]
+		then
+			read -p "是否继续执行【y/n】: " addIsProcess01
+			if [ "n" == ${addIsProcess01} ]
+			then
+				exit
+			fi
+		fi
 		echo "++++++++++++++++    checkout 结束    ++++++++++++++++"
 		
 		echo "++++++++++++++++    pull 开始    ++++++++++++++++"
 		git pull
+		# 出现错误，判断是否继续
+		if [ $? -ne 0 ]
+		then
+			read -p "是否继续执行【y/n】: " addIsProcess01
+			if [ "n" == ${addIsProcess01} ]
+			then
+				exit
+			fi
+		fi
 		echo "++++++++++++++++    pull 结束    ++++++++++++++++"
 		
 		echo "++++++++++++++++    merge 开始    ++++++++++++++++"
 		read -p "请输入merge操作备注: " mergeRemark
 		read -p "请输入需要合并的分支名: " mergeBranch
 		git merge --no-ff -m ${mergeRemark} ${mergeBranch}
+		# 出现错误，判断是否继续
+		if [ $? -ne 0 ]
+		then
+			read -p "是否继续执行【y/n】: " addIsProcess01
+			if [ "n" == ${addIsProcess01} ]
+			then
+				exit
+			fi
+		fi
 		echo "++++++++++++++++    merge 结束    ++++++++++++++++"
 		
 		echo "++++++++++++++++    push 开始    ++++++++++++++++"
