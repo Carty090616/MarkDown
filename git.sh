@@ -27,16 +27,17 @@ do
 	elif [ 2 == ${number} ]
 	then
 		git pull
+		echo "++++++++    pull 完    ++++++++"
 		
 		git add .
-		echo "add 完"
+		echo "++++++++    add 完    ++++++++"
 		
 		read -p "请输入提交备注: " remark
 		git commit -m ${remark}
-		echo "commit 完"
+		echo "++++++++    commit 完    ++++++++"
 		
 		git push
-		echo "push 完"
+		echo "++++++++    push 完    ++++++++"
 	# **********   操作二结束执行   **********
 	
 	
