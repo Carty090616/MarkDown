@@ -2,6 +2,10 @@
 
 + [二叉堆](./data_structure/binary_heap/binary_heap.md)
 
+## 算法
+
++ [Feed算法](./algorithm/feed_algorithm.md)
+
 ## java
 
 ### 基础
