@@ -30,6 +30,7 @@
 
 + [Mac快捷键](./mac/mac快捷键.md)
 + [Mac快捷键](./mac/mac使用移动硬盘.md)
++ [vscode安装和使用](./mac/vscode.md)
 
 ## 软件安装
 
