@@ -27,6 +27,7 @@
    + 安装
 
    + 基础
+      + [mysql事务机制](./database/mysql/基础/事务.md)
 
    + 操作
       + [检查重复数据](./database/mysql/操作/检查重复数据.md)
@@ -57,3 +58,9 @@
 # 软件安装
 
 + [codis安装](./software_install/codis.md)
+
+# 编程基础知识
+
+1. 网络篇
+   + [CNAME](./编程基础知识/网络篇/CNAME.md)
+   + [CDN](./编程基础知识/网络篇/CDN.md)
