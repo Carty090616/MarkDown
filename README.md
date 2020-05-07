@@ -15,6 +15,7 @@
 
 2. 并发
    + [ConcurrentHashMap](./java/high_concurrence/ConcurrentHashMap/ConcurrentHashMap.md)
+   + [java锁分类](./java/high_concurrence/锁/java锁分类.md)
 
 3. 队列
    + [队列总结](./java/high_concurrence/queue/queue_summary.md)
