@@ -4,7 +4,7 @@
     
         * 什么是面向对象
         
-            * [面向对象与面向过程](git/data_structure/binary_heap/binary_heap.md)
+            * [面向对象与面向过程](/data_structure/binary_heap/binary_heap.md)
         
             * [面向对象的三大基本特征](/basics/object-oriented/characteristics.md)
         
