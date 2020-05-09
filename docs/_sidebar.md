@@ -2,7 +2,8 @@
 
     * 数据结构
             
-        * [二叉堆](./md/编程人生/data_structure/binary_heap/binary_heap.md)
+        * [二叉堆](./md/编程人生/data_structure/二叉堆/binary_heap.md)
+        * [数据结构java版](./md/编程人生/data_structure/数据结构Java版/数据结构java版.md)
 
     * 算法
 
