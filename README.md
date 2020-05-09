@@ -22,6 +22,9 @@
       + [ArrayBlockingQueue](./java/high_concurrence/queue/ArrayBlockingQueue.md)
       + [PriorityBlockingQueue](./java/high_concurrence/queue/PriorityBlockingQueue.md)
 
+4. 实践技巧
+   + [布隆过滤器](./java/实践技巧/布隆过滤器.md)
+
 # 数据库
 
 1. mysql
