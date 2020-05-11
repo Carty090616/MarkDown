@@ -10,27 +10,25 @@
         * [Feed算法](./md/编程人生/algorithm/feed_algorithm.md)
 
     * java
-
         * 基础
             * String
-
                 * [String源码分析](./md/编程人生/java/base/string/String.md)
-
                 * [String的hashcode方法选取31做乘子的原因](./md/编程人生/java/base/string/hashcode_choose_31_reason.md)
 
         * 并发
-
             * [ConcurrentHashMap](./md/编程人生/java/high_concurrence/ConcurrentHashMap/ConcurrentHashMap.md)
             * [java锁分类](./md/编程人生/java/high_concurrence/锁/java锁分类.md)
 
-        * 队列
-
-            * [队列总结](./md/编程人生/java/high_concurrence/queue/queue_summary.md)
-                * [ArrayBlockingQueue](./md/编程人生/java/high_concurrence/queue/ArrayBlockingQueue.md)
-                * [PriorityBlockingQueue](./md/编程人生/java/high_concurrence/queue/PriorityBlockingQueue.md)
+            * 队列
+                * [队列总结](./md/编程人生/java/high_concurrence/queue/queue_summary.md)
+                    * [ArrayBlockingQueue](./md/编程人生/java/high_concurrence/queue/ArrayBlockingQueue.md)
+                    * [PriorityBlockingQueue](./md/编程人生/java/high_concurrence/queue/PriorityBlockingQueue.md)
 
         * 实践技巧
             * [布隆过滤器](./md/编程人生/java/实践技巧/布隆过滤器.md)
+
+        * jvm
+            * [垃圾回收](./md/编程人生/java/jvm/gc.md)
 
     * 数据库
 
