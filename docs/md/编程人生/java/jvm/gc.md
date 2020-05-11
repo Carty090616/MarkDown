@@ -54,7 +54,7 @@
 2018-08-21T13:40:42.917+0800: 331.450: Application time: 1.0001349 seconds
 ```
 
-还是这个例子，2018-08-21T13:40:41.916+0800: 是通过 PrintGCDateStamps 加入的，而 330.450 是通过 PrintGCTimeStamps 加入的，前者负责打印当前的时间，后者表示 JVM 启动至今所经过的时间
+还是这个例子，``` 2018-08-21T13:40:41.916+0800: ``` 是通过 PrintGCDateStamps 加入的，而 330.450 是通过 PrintGCTimeStamps 加入的，前者负责打印当前的时间，后者表示 JVM 启动至今所经过的时间
 
 ### -XX:+PrintHeapAtGC
 
@@ -192,7 +192,7 @@ CMS 日志解读
 
 1. 初始标记：多线程，user 和 real 可以看出。老年代容量 2621440K，已经占用 165823K，整个堆的大小 4806016K，使用了 213112K。暂停应用线程，睡了 0.01秒
 2. 并发标记，7个线程
-3. 并发预清理，至到Eden区占用量达到CMSScheduleRemarkEdenPenetration(默认50%)，或达到5秒钟。但是如果ygc在这个阶段中没有发生的话，是达不到理想效果的。此时可以指定CMSMaxAbortablePrecleanTime，但是，等待一般都不是什么好的策略，可以采用CMSScavengeBeforeRemark，使remark之前发生一次ygc，从而减少remark阶段暂停的时间。
+3. 并发预清理，至到Eden区占用量达到 ``` CMSScheduleRemarkEdenPenetration ``` (默认50%)，或达到5秒钟。但是如果ygc在这个阶段中没有发生的话，是达不到理想效果的。此时可以指定CMSMaxAbortablePrecleanTime，但是，等待一般都不是什么好的策略，可以采用 ``` CMSScavengeBeforeRemark ```，使remark之前发生一次ygc，从而减少remark阶段暂停的时间。
 4. 重新标记，STW 时间最长的阶段，可以看到和之前初始标记结果一样
 5. 并发清除，只看时间
 6. 并发重置，为下次 CMS 做准备，只看时间
