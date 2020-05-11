@@ -51,6 +51,7 @@
         * redis
 
             * 安装
+                * [install.md](./md/编程人生/database/redis/安装/install.md)
 
             * 基础
 
