@@ -1,5 +1,95 @@
 # 垃圾回收
 
+## 安全点
+
+在设置 JVM 参数时，本着多多益善的原则，我们可能会加上如下的配置
+
+```java
+-XX:+PrintGCApplicationStoppedTime
+-XX:+PrintGCApplicationConcurrentTime
+-XX:+PrintGCDetails
+```
+
+这样会在 gc 日志中产生大量的内容，例如：
+
+```java
+2018-08-21T13:40:39.636+0800: 328.169: Application time: 0.0000533 seconds
+2018-08-21T13:40:39.636+0800: 328.169: Total time for which application threads were stopped: 0.0001573 seconds, Stopping threads took: 0.0000241 seconds
+2018-08-21T13:40:39.636+0800: 328.169: Application time: 0.0000910 seconds
+2018-08-21T13:40:39.636+0800: 328.170: Total time for which application threads were stopped: 0.0001603 seconds, Stopping threads took: 0.0000223 seconds
+```
+
+这些内容的上下也许看不到任何和 GC 相关的日志，那么这些日志是什么呢？
+
+从参数名字上来看，会觉得上述参数是和 GC 相关的，其实不然。这里前两个参数的打开实际上是负责记录所有的安全点，而不只是 GC 暂停；第三个参数确和 GC 有关。如果非要和 GC 扯上关系的话，那么 GC 日志前会有Appliction time: xxx seconds，而后面会有Total time for which ...，也就是说，这两条语句把 GC 打的日志包裹了起来，这些有助于帮助分析 GC 日志，例如下面：
+
+```java
+2018-08-21T13:40:43.501+0800: 332.034: Application time: 0.5838027 seconds
+{Heap before GC invocations=3 (full 1):
+ par new generation   total 2184576K, used 1795001K [0x0000000680000000, 0x0000000720000000, 0x0000000720000000)
+  eden space 1747712K, 100% used [0x0000000680000000, 0x00000006eaac0000, 0x00000006eaac0000)
+  from space 436864K,  10% used [0x0000000705560000, 0x000000070838e5b0, 0x0000000720000000)
+  to   space 436864K,   0% used [0x00000006eaac0000, 0x00000006eaac0000, 0x0000000705560000)
+ concurrent mark-sweep generation total 2621440K, used 165820K [0x0000000720000000, 0x00000007c0000000, 0x00000007c0000000)
+ Metaspace       used 67048K, capacity 68642K, committed 68736K, reserved 1110016K
+  class space    used 8241K, capacity 8546K, committed 8576K, reserved 1048576K
+2018-08-21T13:40:43.502+0800: 332.036: [GC (Allocation Failure) 332.036: [ParNew
+Desired survivor size 223674368 bytes, new threshold 15 (max 15)
+- age   1:   63634632 bytes,   63634632 total
+- age   2:    1064928 bytes,   64699560 total
+- age   3:   24489776 bytes,   89189336 total
+: 1795001K->92332K(2184576K), 0.1389036 secs] 1960821K->258153K(4806016K), 0.1390975 secs] [Times: user=0.37 sys=0.16, real=0.14 secs]
+Heap after GC invocations=4 (full 1):
+ par new generation   total 2184576K, used 92332K [0x0000000680000000, 0x0000000720000000, 0x0000000720000000)
+  eden space 1747712K,   0% used [0x0000000680000000, 0x0000000680000000, 0x00000006eaac0000)
+  from space 436864K,  21% used [0x00000006eaac0000, 0x00000006f04eb3f0, 0x0000000705560000)
+  to   space 436864K,   0% used [0x0000000705560000, 0x0000000705560000, 0x0000000720000000)
+ concurrent mark-sweep generation total 2621440K, used 165820K [0x0000000720000000, 0x00000007c0000000, 0x00000007c0000000)
+ Metaspace       used 67048K, capacity 68642K, committed 68736K, reserved 1110016K
+  class space    used 8241K, capacity 8546K, committed 8576K, reserved 1048576K
+}
+2018-08-21T13:40:43.642+0800: 332.175: Total time for which application threads were stopped: 0.1406530 seconds, Stopping threads took: 0.0008240 seconds
+```
+
+从上段日志可以得知，应用程序在前 0.5838027秒是在处理实际工作的，然后所有应用线程暂停了 0.1406530秒，其中等待所有应用线程到达安全点用了 0.0008240秒。而暂停这 0.1406530秒，实际上用在了GC上，可以看到 GC 花费的时间 real=0.14 secs，和应用线程暂停的时间相对应。这样看来，似乎这些日志用处不是很大。然而，作为这一小节的主角，它还是有一些用处的，那就是分析安全点。
+
+其实，程序进入安全点不只是在 GC 的时候，不同的 JIT 活动，偏向锁擦除，特定的 JVMTI 操作，这些都会导致程序暂停进入安全点。所以会发现这些安全点的日志特别多，而打印安全点日志就是为了发现触发安全点是否存在异常和优化的空间，尽管可能只花费了几十毫秒，但是如今大量并发的时代，这几十毫秒意味着很大的性能浪费与不友好。
+
+加上如下这组 JVM 参数：
+
+```java
+-XX:+PrintSafepointStatistics
+-XX:+PrintSafepointStatisticsCount=1
+```
+
+该配置会将额外的信息输出到日志中，类似下面这样：
+
+```java
+5.141: RevokeBias [ 13  0  2 ]  [ 0  0  0  0  0 ]  0 
+Total time for which application threads were stopped: 0.0000782 seconds, Stopping threads took: 0.0000269 seconds
+```
+
+这里可以看到，多了上面一行日志，那分别都表示什么呢？
+
++ JVM 启动后所经历的毫秒数（5.141）
++ 触发这次 STW 的操作名是 RevokeBias，如果看到是 no vm operation，就说明这是一个“保证安全点”。JVM 默认会每秒触发一次安全点来处理那些非紧急的排队操作。
++ 停在安全点的线程数量（13）
++ 在安全点开始时仍在运行的线程数量（0）
++ 虚拟机操作开始执行前仍处于阻塞状态的线程数量（2）
++ 到达安全点时各个阶段以及执行操作所花的时间（0）
+
+> -XX:GuaranteedSafepointInterval=0 可以关闭第二点提到的保证安全点；-XX:GuaranteedSafepointInterval=1000 则表示 1秒触发一次
+
+> 第二个括号里很多个 0，网上找了一段解释：This part is the most interesting. It tells us how long (in milliseconds) the VM spun waiting for threads to reach the safepoint. Second, it lists how long it waited for threads to block. The third number is the total time waiting for threads to reach the safepoint (spin + block + some other time). Fourth, is the time spent in internal VM cleanup activities. Fifth, is the time spent in the operation itself.
+
+> DEBUGGING JVM SAFEPOINT PAUSES
+
+> 而最后一个 0，说是 page_trap_count，暂时还不清楚是什么意思
+
+最后，推荐知乎上讲解 SafePoint 的帖子，用于帮助排查 STW 时间过长的问题，总结起来，就是分析 safepoint 的四个阶段：Spin，Block，Cleanup，VM Operation 陈亮的回答
+
+至此，安全点分析告一段落。
+
 ## gc打印控制参数
 
 ```java
