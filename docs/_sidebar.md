@@ -21,15 +21,12 @@
         * 并发
 
             * [ConcurrentHashMap](./md/编程人生/java/high_concurrence/ConcurrentHashMap/ConcurrentHashMap.md)
-
             * [java锁分类](./md/编程人生/java/high_concurrence/锁/java锁分类.md)
 
         * 队列
 
             * [队列总结](./md/编程人生/java/high_concurrence/queue/queue_summary.md)
-
                 * [ArrayBlockingQueue](./md/编程人生/java/high_concurrence/queue/ArrayBlockingQueue.md)
-
                 * [PriorityBlockingQueue](./md/编程人生/java/high_concurrence/queue/PriorityBlockingQueue.md)
 
         * 实践技巧
@@ -66,3 +63,12 @@
             * [GitHub克隆加速](./md/编程人生/git/GitHub克隆加速.md)
 
 * 经济人生
+
+    * 理论
+        * [经济学理论](./md/经济人生/理论/经济学理论.md)
+
+    * 股票
+        * [股票](./md/经济人生/股票/股票.md)
+
+    * 基金
+        * [基金](./md/经济人生/基金/基金.md)
