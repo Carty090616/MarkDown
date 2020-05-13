@@ -65,8 +65,7 @@
         * 理论
 
         * 实践
-            * [提交到多个远程仓库](./md/编程人生/git/提交到多个远程仓库.md)
-            * [GitHub克隆加速](./md/编程人生/git/GitHub克隆加速.md)
+            * [Maven引入外部jar的方式](./md/编程人生/maven/maven引入外部jar.md)
 
 * 经济人生
 
