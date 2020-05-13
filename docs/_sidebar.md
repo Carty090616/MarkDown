@@ -29,6 +29,7 @@
 
         * jvm
             * [垃圾回收](./md/编程人生/java/jvm/gc.md)
+            * [JVM--参数调优](./md/编程人生/java/jvm/参数调优.md)
 
     * 数据库
 
