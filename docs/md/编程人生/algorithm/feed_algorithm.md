@@ -1,6 +1,7 @@
 
 - [什么是Feed算法](#什么是Feed算法)
 - [常见的Feed设计方案](#常见的Feed设计方案)
+- [参考博客](#参考博客)
 
 # 什么是Feed算法
 
@@ -37,7 +38,7 @@ Feed是一个互联网早起概念，本意是RSS(Really Simple Syndication--简
 3. 智能排序法
 
 
-### 参考博客
+# 参考博客
 
  + https://www.jianshu.com/p/d2be205adaa2?from=timeline
  + https://www.jianshu.com/p/4b51126fe930
