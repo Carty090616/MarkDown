@@ -17,6 +17,7 @@
         * [贪心算法](./md/编程人生/algorithm/贪心算法.md)
         * [hash算法](./md/编程人生/algorithm/hash算法.md)
         * [KMP算法](./md/编程人生/algorithm/KMP算法.md)
+        * [排序算法--java版](./md/编程人生/algorithm/排序算法--java版.md)
 
     * java
         * 基础
