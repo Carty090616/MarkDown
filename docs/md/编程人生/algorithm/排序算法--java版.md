@@ -1,7 +1,7 @@
 # 排序算法--java版
 
 - [概述](#概述)
-- [冒泡排序（Bubble Sort）](#冒泡排序bubble-sort)
+- [冒泡排序--bubble-sort](#冒泡排序--bubble-sort)
 - [选择排序（Selection Sort）](#选择排序selection-sort)
 - [插入排序（Insertion Sort）](#插入排序insertion-sort)
 - [希尔排序（Shell Sort）](#希尔排序shell-sort)
@@ -33,7 +33,7 @@
 
 ---
 
-## 冒泡排序（Bubble Sort）
+## 冒泡排序--bubble-sort
 
 冒泡排序是一种简单的排序算法。它重复地走访过要排序的数列，一次比较两个元素，如果它们的顺序错误就把它们交换过来。走访数列的工作是重复地进行直到没有再需要交换，也就是说该数列已经排序完成。这个算法的名字由来是因为越小的元素会经由交换慢慢“浮”到数列的顶端。 
 
