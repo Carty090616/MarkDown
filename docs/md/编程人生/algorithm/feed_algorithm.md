@@ -1,4 +1,8 @@
-### 什么是Feed算法
+
+- [什么是Feed算法](#什么是Feed算法)
+- [常见的Feed设计方案](#常见的Feed设计方案)
+
+# 什么是Feed算法
 
 Feed中文翻译为：喂食。
 
@@ -14,7 +18,7 @@ Feed是一个互联网早起概念，本意是RSS(Really Simple Syndication--简
 1. 给用户分发（展示）哪些内容；
 2. 对分发的内容进行怎样的排序；
 
-### 常见的Feed设计方案
+# 常见的Feed设计方案
 
 1. Timeline（时间线）
 
