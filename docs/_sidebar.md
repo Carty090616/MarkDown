@@ -67,6 +67,9 @@
         * 实践
             * [Maven引入外部jar的方式](./md/编程人生/maven/maven引入外部jar.md)
 
+    * Go
+        * [Mac安装go语言开发环境](./md/编程人生/go/mac安装go开发环境.md)
+
 * 经济人生
 
     * 理论
