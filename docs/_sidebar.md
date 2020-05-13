@@ -8,6 +8,15 @@
     * 算法
 
         * [Feed算法](./md/编程人生/algorithm/feed_algorithm.md)
+        * [稳定的排序算法](./md/编程人生/algorithm/稳定的排序算法.md)
+        * [不稳定的排序算法](./md/编程人生/algorithm/不稳定的排序算法.md)
+        * [海量数据处理](./md/编程人生/algorithm/海量数据处理.md)
+        * [全排列](./md/编程人生/algorithm/全排列.md)
+        * [深度优先和广度优先搜索](./md/编程人生/algorithm/深度优先和广度优先搜索.md)
+        * [时间复杂度&空间复杂度](./md/编程人生/algorithm/时间复杂度&空间复杂度.md)
+        * [贪心算法](./md/编程人生/algorithm/贪心算法.md)
+        * [hash算法](./md/编程人生/algorithm/hash算法.md)
+        * [KMP算法](./md/编程人生/algorithm/KMP算法.md)
 
     * java
         * 基础
