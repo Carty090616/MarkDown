@@ -48,16 +48,18 @@
             * 安装
 
             * 基础
-                * [mysql事务机制](./md/编程人生/database/mysql/基础/事务.md)
+                * [事务机制](./md/编程人生/数据库/mysql/基础/事务.md)
+                * [锁](./md/编程人生/数据库/mysql/基础/锁.md)
+                * [索引](./md/编程人生/数据库/mysql/基础/索引.md)
 
             * 操作
-                * [检查重复数据](./md/编程人生/database/mysql/操作/检查重复数据.md)
-                * [查看mysql数据库连接数、并发数相关信息](./md/编程人生/database/mysql/操作/查看mysql数据库连接数、并发数相关信息.md)
+                * [检查重复数据](./md/编程人生/数据库/mysql/操作/检查重复数据.md)
+                * [查看mysql数据库连接数、并发数相关信息](./md/编程人生/数据库/mysql/操作/查看mysql数据库连接数、并发数相关信息.md)
 
         * redis
 
             * 安装
-                * [install.md](./md/编程人生/database/redis/安装/install.md)
+                * [install.md](./md/编程人生/数据库/redis/安装/install.md)
 
             * 基础
 
