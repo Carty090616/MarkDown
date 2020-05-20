@@ -38,7 +38,7 @@
 
 ## 体系架构
 
-![innodb](./ic/InnoDB.png)
+![innodb](./pic/InnoDB.png)
 
    + 由多个内存块组成的内存池
    + 后台线程主要负责刷新内存池中的数据，保证缓冲池中的内存缓存的都是最近的数据；此外将已修改的数据刷新到磁盘文件；同时保证在数据库发生异常的情况下InnoDB能恢复到正常运行状态。
@@ -87,6 +87,16 @@ InnoDB是多线程模型，因此其后台有多个不同的后台线程，负�
 
 #### LRU List、Free List和Flush List
 
+##### LRU List
 通常来说，数据库中的缓存池是通过LRU（Latest Recent Used，最近最少使用）算法来进行管理的。即最频繁使用的页在LRU列表的前端，而最少使用的页在LRU列表的尾端。当缓冲池不能存放新读取到的页时，将首先释放LRU列表中尾端额页。
 
-在InnoDB存储引擎中，缓冲池中页的大小默认为16KB，同样使用LRU算法对缓存池进行管理。稍有不同的是InnoDB存储引擎对传统的LRU算法做出了一些优化。在InnoDB的存储引擎中，LRU列表中还加入了midpoint位置。新读取到的页，虽然是最新访问的页，但并不是直接放入到LRU列表首部，而是放入到midpoint位置。这个策略被称为midpoint insertion strategy。在默认配置下，该位置位于LRU列表长度的5/8出，通过 ``` innodb_old_blocks_pct ``` 控制。
+在InnoDB存储引擎中，缓冲池中页的大小默认为16KB，同样使用LRU算法对缓存池进行管理。稍有不同的是InnoDB存储引擎对传统的LRU算法做出了一些优化。在InnoDB的存储引擎中，LRU列表中还加入了midpoint位置。新读取到的页，虽然是最新访问的页，但并不是直接放入到LRU列表首部，而是放入到midpoint位置。这个策略被称为midpoint insertion strategy。在默认配置下，该位置位于LRU列表长度的5/8出，通过 ``` innodb_old_blocks_pct ``` 控制。midpoint至首端称之为new列表，midpoint至尾端称之为old列表。
+
+不采取朴素的LRU算法的原因：若直接将读取到的页放入到LRU的首部，那么某些SQL操作可能会使缓存池中的页被移除，而下次需要读取这些已经被移除的页时，则需要重新访问磁盘，从而影响缓存池的效率（常见的这类操作有索引或数据的扫描操作），这些操作需要访问表中的许多页，甚至全部页，而这些页通常来说又仅在这次查询中需要，并不是热点数据。
+
+使用 ``` innodb_old_blocks_time ``` 可以设置页被读取到midpoint位置后需要等待多久才会被加入到LRU列表的热端。
+
+使用 ``` innodb_old_blocks_pct ``` 设置热点数据在LRU列表中的比例。
+
+##### Free List
+

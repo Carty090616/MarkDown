@@ -21,6 +21,10 @@
         * [KMP算法](./md/编程人生/algorithm/KMP算法.md)
         * [排序算法--java版](./md/编程人生/algorithm/排序算法--java版.md)
 
+    * Linux
+        * [5种IO模型](./md/编程人生/Linux/5种IO模型.md)
+        * [Socket技术](./md/编程人生/Linux/Socket技术.md)
+
     * java
         * 基础
             * String
