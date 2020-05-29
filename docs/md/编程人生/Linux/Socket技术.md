@@ -316,3 +316,7 @@ printf("Buffer length: %d\n", optVal);
 ```
 
 TCP套接字默认情况下是阻塞模式
+
+# 参考博客
+
++ https://www.jianshu.com/p/066d99da7cbd

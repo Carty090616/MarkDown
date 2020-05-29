@@ -39,9 +39,13 @@
                 * [队列总结](./md/编程人生/java/high_concurrence/queue/queue_summary.md)
                     * [ArrayBlockingQueue](./md/编程人生/java/high_concurrence/queue/ArrayBlockingQueue.md)
                     * [PriorityBlockingQueue](./md/编程人生/java/high_concurrence/queue/PriorityBlockingQueue.md)
+            
+            * 实践
+                * [高并发下修改数据](./md/编程人生/java/high_concurrence/实践/高并发下修改数据.md)
 
         * 实践技巧
             * [布隆过滤器](./md/编程人生/java/实践技巧/布隆过滤器.md)
+            * [下载文件的方式](./md/编程人生/java/实践技巧/下载文件的方式.md)
 
         * jvm
             * [垃圾回收](./md/编程人生/java/jvm/gc.md)
