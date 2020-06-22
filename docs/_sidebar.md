@@ -4,8 +4,18 @@
 
         * [英汉互译](./md/编程人生/中英对照表/英汉互译.md)
 
+    * 编程基础知识
+
+        * 计算机基础知识篇
+            * [二进制](./md/编程人生/编程基础知识/计算机基础知识篇/二进制.md)
+
+        * 网络篇
+            * [CDN](./md/编程人生/编程基础知识/网络篇/CDN.md)
+            * [CNAME](./md/编程人生/编程基础知识/网络篇/CNAME.md)
+            * [HTTP协议](./md/编程人生/编程基础知识/网络篇/HTTP协议.md)
+
     * 数据结构
-            
+
         * [二叉堆](./md/编程人生/data_structure/二叉堆/binary_heap.md)
         * [数据结构java版](./md/编程人生/data_structure/数据结构Java版/数据结构java版.md)
 
@@ -34,6 +44,7 @@
         * 并发
             * [ConcurrentHashMap](./md/编程人生/java/high_concurrence/ConcurrentHashMap/ConcurrentHashMap.md)
             * [java锁分类](./md/编程人生/java/high_concurrence/锁/java锁分类.md)
+            * [线程池(Executor框架)](./md/编程人生/java/high_concurrence/thread/线程池.md)
 
             * 队列
                 * [队列总结](./md/编程人生/java/high_concurrence/queue/queue_summary.md)
