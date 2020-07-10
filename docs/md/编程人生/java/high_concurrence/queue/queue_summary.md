@@ -1,7 +1,5 @@
-# 队列总结
-
 队列 | 有界性	| 锁	| 数据结构
-:-: | :-: | :-: | :-: | :-:
+:-: | :-: | :-: | :-: 
 [ArrayBlockingQueue](./ArrayBlockingQueue.md)	| bounded(有界)	| 加锁	| arrayList
 LinkedBlockingQueue	| optionally-bounded	| 加锁	| linkedList
 [PriorityBlockingQueue](./PriorityBlockingQueue.md)	| unbounded	| 加锁	| heap
@@ -11,7 +9,7 @@ LinkedTransferQueue	| unbounded	| 加锁	| heap
 LinkedBlockingDeque	| unbounded	| 无锁	| heap
 
 
-## 方法
++ BlockingQueue 代码
 
 ```java
 public interface BlockingQueue<E> extends Queue<E> {
