@@ -104,6 +104,9 @@
     * Go
         * [Mac安装go语言开发环境](./md/编程人生/go/mac安装go开发环境.md)
 
+    * 软件安装
+        * [Linux及相关软件部署流程](./md/编程人生/software_install/linux部署流程.md)
+
 * 经济人生
 
     * 理论
