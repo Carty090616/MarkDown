@@ -51,14 +51,14 @@
                     * [ArrayBlockingQueue](./md/编程人生/java/high_concurrence/queue/ArrayBlockingQueue.md)
                     * [PriorityBlockingQueue](./md/编程人生/java/high_concurrence/queue/PriorityBlockingQueue.md)
             
-            * 实践
-                * [高并发下修改数据](./md/编程人生/java/high_concurrence/实践/高并发下修改数据.md)
+            * 并发实践
+                * [高并发下修改数据](./md/编程人生/java/high_concurrence/并发实践/高并发下修改数据.md)
 
-        * 实践技巧
+        * JAVA实践技巧
             * [布隆过滤器](./md/编程人生/java/实践技巧/布隆过滤器.md)
             * [下载文件的方式](./md/编程人生/java/实践技巧/下载文件的方式.md)
 
-        * jvm
+        * JVM
             * [垃圾回收](./md/编程人生/java/jvm/gc.md)
             * [JVM--参数调优](./md/编程人生/java/jvm/参数调优.md)
 
