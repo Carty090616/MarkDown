@@ -1,6 +1,4 @@
-# 部署项目流程
-
-## 固定ip
+# 固定ip
 
 1. 选择桥接模式
 2. 修改 vi /etc/sysconfig/network-scripts/ifcfg-ens33 有可能不是ens33）
@@ -15,7 +13,7 @@ DNS1="192.168.1.1"
 3. 重启网卡：service network restart
 4. 测试是否能ping通外网：ping www.baidu.com
 
-## 配置java环境
+# 配置java环境
 
 1. 下载jdk安装包，并解压
 2. 修改配置文件: vi /etc/profile
@@ -29,7 +27,7 @@ export PATH=$PATH:${JAVA_HOME}/bin
 3. 让配置文件生效：source /etc/profile
 4. 查看结果：java -version
 
-## 配置maven
+# 配置maven
 
 1. 前往 /usr/maven 文件夹，下载包
 ```shell
@@ -48,19 +46,19 @@ export PATH=$MAVEN_HOME/bin:$PATH
 source /etc/profile
 ```
 
-## 安装git
+# 安装git
 
 + yum方式
 ```shell
 # 版本很低
-yum install git
+yum -y install git
 ```
 
-## 安装net-tools 
+# 安装net-tools 
 
-yum install net-tools
+yum -y install net-tools
 
-## 安装 iptables
+# 安装 iptables
 
 ```shell
 # 停止 firewalld 服务
@@ -73,14 +71,14 @@ yum install -y iptables-services
 systemctl enable iptables.service
 ```
 
-## 关闭 SELinux
+# 关闭 SELinux
 
 ```shell
 sed -i 's|SELINUX=enforcing|SELINUX=disabled|' /etc/sysconfig/selinux
 ```
 
 
-## 开放端口
+# 开放端口
 
 ```shell
 # 添加配置文件
@@ -95,7 +93,7 @@ vi /etc/sysconfig/iptables
 service iptables restart
 ```
 
-## 切换yum的源
+# 切换yum的源
 
 ```shell
 # 备份当前yum源防止出现意外还可以还原回来
@@ -117,7 +115,7 @@ yum update
 ```
 
 
-## 安装gitlab(社区版)
+# 安装gitlab(社区版)
 
 + 企业版部分功能需要缴费，例如push功能
 
@@ -174,14 +172,14 @@ gitlab-rails console Notify.test_email('yoyo_你自己随便邮箱@qq.com', '邮
 + 参考博客
    + https://blog.csdn.net/weixin_43767602/article/details/84568858
 
-## 安装jenkins
+# 安装jenkins
 
 + Jenkins下载页面（不需要手动下载）：https://pkg.jenkins.io/redhat-stable/
 + 执行以下命令：
 ```shell
 sudo wget -O /etc/yum.repos.d/jenkins.repo https://pkg.jenkins.io/redhat-stable/jenkins.repo
 sudo rpm --import https://pkg.jenkins.io/redhat-stable/jenkins.io.key
-yum install jenkins
+yum install -y jenkins
 ```
 + 修改配置文件：
 ```shell
@@ -200,7 +198,103 @@ systemctl start jenkins
 + 可能出现的问题
    + 第一次启动失败时：https://blog.csdn.net/hehaimingg/article/details/106849964
 
-## 安装docker
+# gitlab jenkins 集成
+
+https://www.cnblogs.com/yanjieli/p/10613212.html
+
+# jenkins构架钉钉通知
+
+https://www.cnblogs.com/fanpl/articles/12875989.html
+
+# 配置jekins打包脚本
+
+# 安装MySQL
+
++ 下载地址：https://dev.mysql.com/downloads/mysql/5.7.html#downloads
+
+```shell
+# 解压 
+tar -xvf mysql-5.7.31-linux-glibc2.12-x86_64.tar
+
+# 重命名
+mv mysql-5.7.31-linux-glibc2.12-x86_64 /usr/mysql
+
+# 创建mysql用户组和用户并修改权限
+groupadd mysql
+useradd -r -g mysql mysql
+
+# 创建数据目录并赋予权限
+mkdir -p  /data/mysql              #创建目录
+chown mysql:mysql -R /data/mysql   #赋予权限
+
+# 配置my.cnf，清空里面原有的内容，将以下内容复制进去
+vim /etc/my.cnf
+
+[mysqld]
+bind-address=0.0.0.0
+port=3306
+user=mysql
+basedir=/usr/mysql
+datadir=/data/mysql
+socket=/tmp/mysql.sock
+log-error=/data/mysql/mysql.err
+pid-file=/data/mysql/mysql.pid
+#character config
+character_set_server=utf8mb4
+symbolic-links=0
+explicit_defaults_for_timestamp=true
+```
+
++ 初始化数据库
+
+```shell
+# 进入mysql的bin目录
+cd /usr/mysql/bin/
+
+# 初始化
+./mysqld --defaults-file=/etc/my.cnf --basedir=/usr/mysql/ --datadir=/data/mysql/ --user=mysql --initialize
+
+# 查看密码
+cat /data/mysql/mysql.err
+```
+
+![101](./pic/101.png)
+
++ 启动mysql，并更改root 密码
+
+```shell
+# 先将mysql.server放置到/etc/init.d/mysql中
+cp /usr/mysql/support-files/mysql.server /etc/init.d/mysql
+
+# 配置开机自启动
+chmod 777 /etc/init.d/mysql    # 对文件赋予执行权限
+chkconfig --add mysql    # 增加mysql服务
+chkconfig --list mysql    # 查询mysql服务情况,mysqld 0:off 1:off 2:on 3:on 4:on 5:on 6:off    默认的运行级别为2,3,4,5 
+chkconfig --level 345 mysql on    # 如果3，4，5 为off
+
+# 启动
+service mysql start
+ 
+ps -ef|grep mysql
+
+# 登陆mysql
+./mysql -u root -p   #bin目录下
+
+# 再执行下面三步操作，然后重新登录。
+SET PASSWORD = PASSWORD('123456');
+ALTER USER 'root'@'localhost' PASSWORD EXPIRE NEVER;
+FLUSH PRIVILEGES;                                 
+
+# 执行以下步骤，配置客户端链接
+use mysql                                            #访问mysql库
+update user set host = '%' where user = 'root';      #使root能再任何host访问
+FLUSH PRIVILEGES;                                    #刷新
+```
+
++ 开放端口：3306，重启服务器
++ 博客：https://blog.csdn.net/qq_37598011/article/details/93489404
+
+# 安装docker
 
 + 安装docker：yum install -y docker
 + 查看docker是否安装成功：yum list installed |grep docker
@@ -211,7 +305,7 @@ ystemctl enable docker.service
 ```
 + 查看docker服务状态：systemctl status docker
 
-## 配置idea连接docker(次级考虑)
+# 配置idea连接docker(次级考虑)
 
 1. 配置docker的远程端口
     1. vim /usr/lib/systemd/system/docker.service
@@ -223,7 +317,7 @@ ystemctl enable docker.service
 3. 将2375端口放开
 4. idea下载docker插件，配置为tcp socket 连接并输入：tcp://虚拟机地址:2375
 
-## 安装jenkins--docker（次级考虑）
+# 安装jenkins--docker（次级考虑）
 
 1. 拉去镜像：docker pull jenkinsci/blueocean
 2. 运行镜像：修改主机8081端口映射到镜像中的8080端口，如果运行报错显示iptables的问题，则尝试重启iptables一次
@@ -236,15 +330,5 @@ docker container run --name jenkins-blueocean --restart=always --detach \
 4. 去 /var/jenkins_home/secrets 文件夹下找到 initialAdminPassword 文件，查看初始密码
 5. 查看日志：docker container logs jenkins-blueocean
 6. 安装gitlab插件，钉钉插件(钉钉通知暂时不能集成进去)，maven插件
-
-## gitlab jenkins 集成
-
-https://www.cnblogs.com/yanjieli/p/10613212.html
-
-## jenkins构架钉钉通知
-
-https://www.cnblogs.com/fanpl/articles/12875989.html
-
-## 配置jekins打包脚本
 
 
