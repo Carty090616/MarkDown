@@ -294,6 +294,26 @@ FLUSH PRIVILEGES;                                    #刷新
 + 开放端口：3306，重启服务器
 + 博客：https://blog.csdn.net/qq_37598011/article/details/93489404
 
+# redis
+
++ 确认是否安装gcc
+```shell
+gcc -v
+
+# 如果没有gcc
+yum -y install gcc-c++
+```
+
++ 下载redis安装包，并解压包，进入到解压后的路径
+```shell
+# 编译
+make
+# 编译完成之后，可以看到解压文件redis-4.0.8 中会有对应的src、conf等文件夹，这和windows下安装解压的文件一样，大部分安装包都会有对应的类文件、配置文件和一些命令文件。进入到src目录，里边有很多关键性文件：
+
+```
+
+
+
 # 安装docker
 
 + 安装docker：yum install -y docker
