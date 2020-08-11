@@ -32,6 +32,7 @@
         * [排序算法--java版](./md/编程人生/algorithm/排序算法--java版.md)
 
     * Linux
+        * [Linux及相关软件部署流程](./md/编程人生/software_install/linux部署流程.md)
         * [5种IO模型](./md/编程人生/Linux/5种IO模型.md)
         * [Socket技术](./md/编程人生/Linux/Socket技术.md)
 
@@ -105,7 +106,6 @@
         * [Mac安装go语言开发环境](./md/编程人生/go/mac安装go开发环境.md)
 
     * 软件安装
-        * [Linux及相关软件部署流程](./md/编程人生/software_install/linux部署流程.md)
         * [codis安装](./md/编程人生/software_install/codis.md)
 
 * 经济人生
