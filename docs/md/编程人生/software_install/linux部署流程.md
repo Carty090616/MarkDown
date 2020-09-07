@@ -291,6 +291,16 @@ update user set host = '%' where user = 'root';      #使root能再任何host访
 FLUSH PRIVILEGES;                                    #刷新
 ```
 
++ 启动报错
+![mysql-error01](./pic/mysql-error01.png)
+```shell
+# 解决方案
+mkdir /var/log/mariadb
+touch /var/log/mariadb/mariadb.log
+chown -R mysql:mysql /var/log/mariadb/
+service mysql start
+```
+
 + 开放端口：3306，重启服务器
 + 博客：https://blog.csdn.net/qq_37598011/article/details/93489404
 
